@@ -24,6 +24,8 @@ import {
   EyeOff,
   ExternalLink,
   Activity,
+  DollarSign,
+  Target,
 } from "lucide-react";
 
 interface ServiceNode {
@@ -702,70 +704,343 @@ export default function Settings() {
           )}
 
           {/* System Health Dashboard */}
-          <div className="grid md:grid-cols-3 gap-6 mb-8">
-            <Card className="p-6 bg-slate-900 border-slate-700">
-              <div className="flex items-center gap-3 mb-4">
-                <Activity className="w-5 h-5 text-accent" />
-                <h3 className="font-semibold">Connection Health</h3>
+          <Card className="bg-slate-900 border-slate-800 p-6 mb-8">
+            <h2 className="text-xl font-semibold text-slate-100 mb-6">System Health</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-slate-950/50 border border-slate-700 rounded-xl p-5">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="text-slate-400 text-sm">Connection Health</div>
+                  <Activity className="w-4 h-4 text-emerald-400" />
+                </div>
+                <div className="text-3xl font-mono font-bold text-slate-100 mb-1">3/7</div>
+                <div className="text-xs text-slate-500">Active integrations</div>
               </div>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-secondary">Active</span>
-                  <span className="text-lg font-mono text-success">3/7</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-secondary">Warning</span>
-                  <span className="text-lg font-mono text-warning">2/7</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-secondary">Offline</span>
-                  <span className="text-lg font-mono text-danger">2/7</span>
-                </div>
-              </div>
-            </Card>
 
-            <Card className="p-6 bg-slate-900 border-slate-700">
-              <div className="flex items-center gap-3 mb-4">
-                <ExternalLink className="w-5 h-5 text-accent" />
-                <h3 className="font-semibold">API Usage (24h)</h3>
+              <div className="bg-slate-950/50 border border-slate-700 rounded-xl p-5">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="text-slate-400 text-sm">API Usage (24h)</div>
+                  <TrendingUp className="w-4 h-4 text-cyan-400" />
+                </div>
+                <div className="text-3xl font-mono font-bold text-slate-100 mb-1">2,847</div>
+                <div className="text-xs text-slate-500">Total API calls</div>
               </div>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-secondary">OpenAI</span>
-                  <span className="text-lg font-mono">1,247</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-secondary">Claude</span>
-                  <span className="text-lg font-mono">892</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-secondary">YouTube</span>
-                  <span className="text-lg font-mono">156</span>
-                </div>
-              </div>
-            </Card>
 
-            <Card className="p-6 bg-slate-900 border-slate-700">
-              <div className="flex items-center gap-3 mb-4">
-                <TrendingUp className="w-5 h-5 text-accent" />
-                <h3 className="font-semibold">Est. Monthly Cost</h3>
+              <div className="bg-slate-950/50 border border-slate-700 rounded-xl p-5">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="text-slate-400 text-sm">Monthly Cost</div>
+                  <DollarSign className="w-4 h-4 text-amber-400" />
+                </div>
+                <div className="text-3xl font-mono font-bold text-slate-100 mb-1">$137</div>
+                <div className="text-xs text-slate-500">Est. current cycle</div>
               </div>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-secondary">AI Services</span>
-                  <span className="text-lg font-mono">$47.80</span>
+            </div>
+          </Card>
+
+          {/* Channel Production Settings */}
+          <Card className="bg-slate-900 border-slate-800 p-6 mb-8">
+            <div className="mb-6">
+              <h2 className="text-xl font-semibold text-slate-100">Channel Production Settings</h2>
+              <p className="text-sm text-slate-400 mt-1">Control production speed, targets, format mix, and resource limits per channel</p>
+            </div>
+
+            {/* Channel Configuration Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              {[
+                {
+                  name: "AI Productivity Hub",
+                  niche: "AI Tools & Automation",
+                  status: "high",
+                  dailyTarget: 2,
+                  weeklyTarget: 14,
+                  mode: "balanced",
+                  schedule: "daily",
+                  shorts: 60,
+                  longform: 30,
+                  compilation: 10,
+                  approval: "manual",
+                  claudeBudget: 50,
+                  openAIBudget: 40,
+                  klingCredits: 100,
+                  veoBudget: 80,
+                  stopThreshold: 20,
+                  priority: "main_growth_channel"
+                },
+                {
+                  name: "Crypto Insights",
+                  niche: "Cryptocurrency News",
+                  status: "normal",
+                  dailyTarget: 3,
+                  weeklyTarget: 21,
+                  mode: "aggressive",
+                  schedule: "daily",
+                  shorts: 80,
+                  longform: 15,
+                  compilation: 5,
+                  approval: "auto_publish",
+                  claudeBudget: 30,
+                  openAIBudget: 25,
+                  klingCredits: 50,
+                  veoBudget: 40,
+                  stopThreshold: 15,
+                  priority: "high"
+                },
+                {
+                  name: "Mindful Living",
+                  niche: "Wellness & Meditation",
+                  status: "low",
+                  dailyTarget: 1,
+                  weeklyTarget: 7,
+                  mode: "slow_and_careful",
+                  schedule: "weekday_only",
+                  shorts: 50,
+                  longform: 40,
+                  compilation: 10,
+                  approval: "manual",
+                  claudeBudget: 20,
+                  openAIBudget: 15,
+                  klingCredits: 30,
+                  veoBudget: 25,
+                  stopThreshold: 25,
+                  priority: "normal"
+                }
+              ].map((channel, idx) => (
+                <Card key={idx} className="bg-slate-900/90 border-slate-800 p-5">
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <h3 className="text-base font-semibold text-slate-100">{channel.name}</h3>
+                      <p className="text-xs text-slate-400 mt-0.5">{channel.niche}</p>
+                    </div>
+                    <Badge variant={channel.priority === "main_growth_channel" ? "default" : "secondary"} className="text-xs">
+                      {channel.priority === "main_growth_channel" ? "Main" : channel.priority === "high" ? "High" : "Normal"}
+                    </Badge>
+                  </div>
+
+                  {/* Production Speed */}
+                  <div className="mb-4 pb-4 border-b border-slate-800">
+                    <div className="text-xs font-medium text-slate-400 mb-3">Production Speed</div>
+                    <div className="grid grid-cols-2 gap-3 mb-3">
+                      <div>
+                        <label className="text-xs text-slate-500 block mb-1">Daily Target</label>
+                        <input 
+                          type="number" 
+                          value={channel.dailyTarget}
+                          className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-slate-100 font-mono"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-xs text-slate-500 block mb-1">Weekly Target</label>
+                        <input 
+                          type="number" 
+                          value={channel.weeklyTarget}
+                          className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-slate-100 font-mono"
+                        />
+                      </div>
+                    </div>
+                    <div className="mb-2">
+                      <label className="text-xs text-slate-500 block mb-1">Production Mode</label>
+                      <select className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-slate-100">
+                        <option value="slow_and_careful">Slow & Careful</option>
+                        <option value="balanced" selected={channel.mode === "balanced"}>Balanced</option>
+                        <option value="aggressive" selected={channel.mode === "aggressive"}>Aggressive</option>
+                        <option value="maximum_output">Maximum Output</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="text-xs text-slate-500 block mb-1">Schedule Pattern</label>
+                      <select className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-slate-100">
+                        <option value="daily" selected={channel.schedule === "daily"}>Daily</option>
+                        <option value="weekday_only" selected={channel.schedule === "weekday_only"}>Weekday Only</option>
+                        <option value="custom_days">Custom Days</option>
+                        <option value="batch_weekly">Batch Weekly</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  {/* Format Mix */}
+                  <div className="mb-4 pb-4 border-b border-slate-800">
+                    <div className="text-xs font-medium text-slate-400 mb-3">Content Format Mix</div>
+                    <div className="space-y-2">
+                      <div>
+                        <div className="flex items-center justify-between mb-1">
+                          <label className="text-xs text-slate-500">Shorts</label>
+                          <span className="text-xs font-mono text-cyan-400">{channel.shorts}%</span>
+                        </div>
+                        <input 
+                          type="range" 
+                          min="0" 
+                          max="100" 
+                          value={channel.shorts}
+                          className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+                        />
+                      </div>
+                      <div>
+                        <div className="flex items-center justify-between mb-1">
+                          <label className="text-xs text-slate-500">Longform</label>
+                          <span className="text-xs font-mono text-cyan-400">{channel.longform}%</span>
+                        </div>
+                        <input 
+                          type="range" 
+                          min="0" 
+                          max="100" 
+                          value={channel.longform}
+                          className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+                        />
+                      </div>
+                      <div>
+                        <div className="flex items-center justify-between mb-1">
+                          <label className="text-xs text-slate-500">Compilation</label>
+                          <span className="text-xs font-mono text-cyan-400">{channel.compilation}%</span>
+                        </div>
+                        <input 
+                          type="range" 
+                          min="0" 
+                          max="100" 
+                          value={channel.compilation}
+                          className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+                        />
+                      </div>
+                      <div className="flex items-center justify-between pt-1">
+                        <span className="text-xs text-slate-500">Total</span>
+                        <span className="text-xs font-mono text-emerald-400">100%</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Approval Mode */}
+                  <div className="mb-4 pb-4 border-b border-slate-800">
+                    <div className="text-xs font-medium text-slate-400 mb-2">Approval Mode</div>
+                    <select className="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-1.5 text-sm text-slate-100">
+                      <option value="manual" selected={channel.approval === "manual"}>Manual Approval Required</option>
+                      <option value="auto_publish" selected={channel.approval === "auto_publish"}>Auto-Publish After Quality Check</option>
+                      <option value="schedule_only">Schedule Only After Approval</option>
+                    </select>
+                  </div>
+
+                  {/* Resource Limits */}
+                  <div>
+                    <div className="text-xs font-medium text-slate-400 mb-3">Resource Limits (Weekly)</div>
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-slate-500">Claude Budget</span>
+                        <span className="text-xs font-mono text-slate-100">${channel.claudeBudget}</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-slate-500">OpenAI Budget</span>
+                        <span className="text-xs font-mono text-slate-100">${channel.openAIBudget}</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-slate-500">Kling Credits</span>
+                        <span className="text-xs font-mono text-slate-100">{channel.klingCredits}</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-slate-500">Veo Budget</span>
+                        <span className="text-xs font-mono text-slate-100">${channel.veoBudget}</span>
+                      </div>
+                      <div className="flex items-center justify-between pt-2 border-t border-slate-800">
+                        <span className="text-xs text-slate-500">Stop Threshold</span>
+                        <span className="text-xs font-mono text-amber-400">{channel.stopThreshold}%</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Button className="w-full mt-4 bg-cyan-500 hover:bg-cyan-600 text-slate-950">
+                    Save Settings
+                  </Button>
+                </Card>
+              ))}
+            </div>
+
+            {/* Summary Panel */}
+            <Card className="bg-slate-950/50 border-slate-700 p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-base font-semibold text-slate-100">Production Summary</h3>
+                <Badge variant="secondary" className="bg-emerald-500/10 text-emerald-400 border-emerald-500/20">
+                  <Target className="w-3 h-3 mr-1" />
+                  Risk: Low
+                </Badge>
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-4">
+                  <div className="text-xs text-slate-500 mb-1">Total Daily Target</div>
+                  <div className="text-2xl font-mono font-bold text-cyan-400">6</div>
+                  <div className="text-xs text-slate-600 mt-0.5">videos/day</div>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-secondary">Video Gen</span>
-                  <span className="text-lg font-mono">$89.50</span>
+                <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-4">
+                  <div className="text-xs text-slate-500 mb-1">Total Weekly Target</div>
+                  <div className="text-2xl font-mono font-bold text-cyan-400">42</div>
+                  <div className="text-xs text-slate-600 mt-0.5">videos/week</div>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-secondary font-semibold">Total</span>
-                  <span className="text-lg font-mono text-accent font-bold">$137.30</span>
+                <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-4">
+                  <div className="text-xs text-slate-500 mb-1">Est. Weekly Cost</div>
+                  <div className="text-2xl font-mono font-bold text-amber-400">$210</div>
+                  <div className="text-xs text-slate-600 mt-0.5">all providers</div>
+                </div>
+                <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-4">
+                  <div className="text-xs text-slate-500 mb-1">Approval Load</div>
+                  <div className="text-2xl font-mono font-bold text-slate-100">~4</div>
+                  <div className="text-xs text-slate-600 mt-0.5">reviews/day</div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-4">
+                  <div className="text-xs text-slate-400 mb-3">Estimated Provider Usage (Weekly)</div>
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-slate-500">Claude</span>
+                      <span className="text-xs font-mono text-slate-100">$100 / $100 budget</span>
+                    </div>
+                    <div className="w-full bg-slate-700 rounded-full h-1.5">
+                      <div className="bg-emerald-400 h-1.5 rounded-full" style={{ width: '100%' }}></div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-slate-500">OpenAI</span>
+                      <span className="text-xs font-mono text-slate-100">$80 / $80 budget</span>
+                    </div>
+                    <div className="w-full bg-slate-700 rounded-full h-1.5">
+                      <div className="bg-emerald-400 h-1.5 rounded-full" style={{ width: '100%' }}></div>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-slate-500">Kling</span>
+                      <span className="text-xs font-mono text-slate-100">180 / 180 credits</span>
+                    </div>
+                    <div className="w-full bg-slate-700 rounded-full h-1.5">
+                      <div className="bg-emerald-400 h-1.5 rounded-full" style={{ width: '100%' }}></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-4">
+                  <div className="text-xs text-slate-400 mb-3">Production Capacity Analysis</div>
+                  <div className="space-y-3">
+                    <div className="flex items-start gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400 mt-0.5" />
+                      <div>
+                        <div className="text-xs text-slate-100">Targets are realistic</div>
+                        <div className="text-xs text-slate-500 mt-0.5">Current production capacity can meet weekly goals</div>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400 mt-0.5" />
+                      <div>
+                        <div className="text-xs text-slate-100">Credits sufficient</div>
+                        <div className="text-xs text-slate-500 mt-0.5">All provider budgets can cover estimated usage</div>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <AlertTriangle className="w-4 h-4 text-amber-400 mt-0.5" />
+                      <div>
+                        <div className="text-xs text-slate-100">Moderate approval load</div>
+                        <div className="text-xs text-slate-500 mt-0.5">Manual approval channels need ~4 reviews daily</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </Card>
-          </div>
+          </Card>
 
           {/* Error Center */}
           <Card className="p-6 bg-slate-900 border-slate-700">
