@@ -1,8 +1,13 @@
 import { SEO } from "@/components/SEO";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { TrendingUp, TrendingDown, Clock, DollarSign, Video, Eye } from "lucide-react";
+import { TrendingUp, TrendingDown, Clock, DollarSign, Video, Eye, Youtube, CheckCircle2, AlertTriangle, XCircle, LogOut, Loader2 } from "lucide-react";
 import Link from "next/link";
+import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { signOut } from "@/services/authService";
+import { Button } from "@/components/ui/button";
 
 type ChannelMetrics = {
   name: string;
@@ -63,6 +68,31 @@ function formatNumber(num: number): string {
 }
 
 export default function Home() {
+  const { user, isApproved, loading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.replace("/login");
+    }
+    if (!loading && user && !isApproved) {
+      router.replace("/pending-approval");
+    }
+  }, [user, isApproved, loading, router]);
+
+  const handleSignOut = async () => {
+    await signOut();
+    router.replace("/login");
+  };
+
+  if (loading || !user || !isApproved) {
+    return (
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+        <Loader2 className="w-8 h-8 text-cyan-400 animate-spin" />
+      </div>
+    );
+  }
+
   return (
     <>
       <SEO 
@@ -105,6 +135,10 @@ export default function Home() {
                 </Link>
               </nav>
             </div>
+            <Button onClick={handleSignOut} variant="ghost" size="sm" className="text-slate-400 hover:text-slate-100">
+              <LogOut className="w-4 h-4 mr-2" />
+              Sign Out
+            </Button>
           </div>
         </header>
 

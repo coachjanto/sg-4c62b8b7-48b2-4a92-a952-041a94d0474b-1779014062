@@ -26,7 +26,18 @@ import {
   Activity,
   DollarSign,
   Target,
+  Settings as SettingsIcon,
+  Video,
+  Zap,
+  Calendar,
+  Sheet,
+  LogOut,
+  Shield,
 } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { signOut } from "@/services/authService";
 
 interface ServiceNode {
   id: string;
@@ -49,6 +60,31 @@ interface ConnectionLine {
 }
 
 export default function Settings() {
+  const { user, isApproved, isSuperAdmin, loading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.replace("/login");
+    }
+    if (!loading && user && !isApproved) {
+      router.replace("/pending-approval");
+    }
+  }, [user, isApproved, loading, router]);
+
+  const handleSignOut = async () => {
+    await signOut();
+    router.replace("/login");
+  };
+
+  if (loading || !user || !isApproved) {
+    return (
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+        <Loader2 className="w-8 h-8 text-cyan-400 animate-spin" />
+      </div>
+    );
+  }
+
   const [selectedNode, setSelectedNode] = useState<ServiceNode | null>(null);
   const [showApiKeys, setShowApiKeys] = useState<{ [key: string]: boolean }>({});
 
@@ -237,17 +273,40 @@ export default function Settings() {
         <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
           <div className="container mx-auto px-6 py-4">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Settings2 className="w-6 h-6 text-accent" />
-                <h1 className="text-xl font-bold tracking-tight">Integration Control Center</h1>
-              </div>
-              <Link
-                href="/"
-                className="text-sm font-medium text-secondary hover:text-foreground transition-colors flex items-center gap-1"
-              >
-                Back to Dashboard
-                <ChevronRight className="w-4 h-4" />
-              </Link>
+              <nav className="flex gap-6">
+                <Link href="/" className="text-sm font-medium text-secondary hover:text-foreground transition-colors">
+                  Overview
+                </Link>
+                <Link href="/ideas" className="text-sm font-medium text-secondary hover:text-foreground transition-colors">
+                  Ideas
+                </Link>
+                <Link href="/production" className="text-sm font-medium text-secondary hover:text-foreground transition-colors">
+                  Production
+                </Link>
+                <button className="text-sm font-medium text-secondary hover:text-foreground transition-colors">
+                  Advisor
+                </button>
+                <button className="text-sm font-medium text-secondary hover:text-foreground transition-colors">
+                  Monetization
+                </button>
+                <button className="text-sm font-medium text-accent border-b-2 border-accent pb-1">
+                  Settings
+                </button>
+              </nav>
+            </div>
+            <div className="flex items-center gap-3">
+              {isSuperAdmin && (
+                <Link href="/admin">
+                  <Button variant="outline" size="sm" className="border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10">
+                    <Shield className="w-4 h-4 mr-2" />
+                    Admin Panel
+                  </Button>
+                </Link>
+              )}
+              <Button onClick={handleSignOut} variant="ghost" size="sm" className="text-slate-400 hover:text-slate-100">
+                <LogOut className="w-4 h-4 mr-2" />
+                Sign Out
+              </Button>
             </div>
           </div>
         </header>

@@ -1,30 +1,47 @@
 import { SEO } from "@/components/SEO";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import { 
-  Brain, 
-  Plus, 
-  TrendingUp, 
-  Clock, 
-  Target,
-  Zap,
-  DollarSign,
-  CheckCircle2,
-  XCircle,
-  AlertCircle,
-  PlayCircle,
-  Youtube,
-  Sparkles,
-  ListOrdered,
-  Filter,
-  Send,
-  Settings as SettingsIcon
+  Lightbulb, TrendingUp, DollarSign, Zap, Clock, Filter, 
+  Search, Plus, CheckCircle2, XCircle, AlertTriangle, 
+  Play, Pause, SkipForward, RotateCcw, Ban, ExternalLink,
+  Loader2, LogOut
 } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { signOut } from "@/services/authService";
 
 export default function Ideas() {
+  const { user, isApproved, loading: authLoading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!authLoading && !user) {
+      router.replace("/login");
+    }
+    if (!authLoading && user && !isApproved) {
+      router.replace("/pending-approval");
+    }
+  }, [user, isApproved, authLoading, router]);
+
+  const handleSignOut = async () => {
+    await signOut();
+    router.replace("/login");
+  };
+
+  if (authLoading || !user || !isApproved) {
+    return (
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+        <Loader2 className="w-8 h-8 text-cyan-400 animate-spin" />
+      </div>
+    );
+  }
+
   const [activeTab, setActiveTab] = useState<"submit" | "bank" | "override">("submit");
 
   return (
@@ -67,6 +84,10 @@ export default function Ideas() {
                 </Link>
               </nav>
             </div>
+            <Button onClick={handleSignOut} variant="ghost" size="sm" className="text-slate-400 hover:text-slate-100">
+              <LogOut className="w-4 h-4 mr-2" />
+              Sign Out
+            </Button>
           </div>
         </header>
 

@@ -26,8 +26,17 @@ import {
   Sparkles,
   Brain,
   Wand2,
+  ExternalLink,
+  RefreshCw,
+  Loader2,
+  ArrowRight,
+  LogOut,
 } from "lucide-react";
 import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { signOut } from "@/services/authService";
 
 // Mock data
 const channels = [
@@ -273,6 +282,31 @@ const pulseLabels = {
 };
 
 export default function Production() {
+  const { user, isApproved, loading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.replace("/login");
+    }
+    if (!loading && user && !isApproved) {
+      router.replace("/pending-approval");
+    }
+  }, [user, isApproved, loading, router]);
+
+  const handleSignOut = async () => {
+    await signOut();
+    router.replace("/login");
+  };
+
+  if (loading || !user || !isApproved) {
+    return (
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+        <Loader2 className="w-8 h-8 text-cyan-400 animate-spin" />
+      </div>
+    );
+  }
+
   const [selectedChannel, setSelectedChannel] = useState<string | null>(null);
 
   const getProviderStatus = (provider: any) => {
@@ -320,52 +354,31 @@ export default function Production() {
                   Real-time pulse of all active channel workflows, commands, AI usage, and production resources
                 </p>
               </div>
-              <Link href="/">
-                <Button variant="outline" size="sm">
-                  Back to Overview
-                </Button>
-              </Link>
+              <nav className="flex gap-6">
+                <Link href="/" className="text-sm font-medium text-secondary hover:text-foreground transition-colors">
+                  Overview
+                </Link>
+                <Link href="/ideas" className="text-sm font-medium text-secondary hover:text-foreground transition-colors">
+                  Ideas
+                </Link>
+                <button className="text-sm font-medium text-accent border-b-2 border-accent pb-1">
+                  Production
+                </button>
+                <button className="text-sm font-medium text-secondary hover:text-foreground transition-colors">
+                  Advisor
+                </button>
+                <button className="text-sm font-medium text-secondary hover:text-foreground transition-colors">
+                  Monetization
+                </button>
+                <Link href="/settings" className="text-sm font-medium text-secondary hover:text-foreground transition-colors">
+                  Settings
+                </Link>
+              </nav>
             </div>
-
-            {/* Global Status */}
-            <div className="grid grid-cols-4 gap-4">
-              <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-secondary mb-1">Active Workflows</p>
-                    <p className="text-3xl font-bold font-mono text-cyan-400">2</p>
-                  </div>
-                  <Zap className="w-8 h-8 text-cyan-400 opacity-50" />
-                </div>
-              </div>
-              <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-secondary mb-1">Pending Approvals</p>
-                    <p className="text-3xl font-bold font-mono text-amber-400">1</p>
-                  </div>
-                  <Eye className="w-8 h-8 text-amber-400 opacity-50" />
-                </div>
-              </div>
-              <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-secondary mb-1">Failed Jobs</p>
-                    <p className="text-3xl font-bold font-mono text-slate-400">0</p>
-                  </div>
-                  <XCircle className="w-8 h-8 text-slate-600 opacity-50" />
-                </div>
-              </div>
-              <div className="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-secondary mb-1">Credit Warnings</p>
-                    <p className="text-3xl font-bold font-mono text-rose-400">2</p>
-                  </div>
-                  <AlertTriangle className="w-8 h-8 text-rose-400 opacity-50" />
-                </div>
-              </div>
-            </div>
+            <Button onClick={handleSignOut} variant="ghost" size="sm" className="text-slate-400 hover:text-slate-100">
+              <LogOut className="w-4 h-4 mr-2" />
+              Sign Out
+            </Button>
           </Card>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
