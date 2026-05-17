@@ -62,6 +62,8 @@ interface ConnectionLine {
 export default function Settings() {
   const { user, isApproved, isSuperAdmin, loading } = useAuth();
   const router = useRouter();
+  const [selectedNode, setSelectedNode] = useState<ServiceNode | null>(null);
+  const [showApiKeys, setShowApiKeys] = useState<{ [key: string]: boolean }>({});
 
   useEffect(() => {
     if (!loading && !user) {
@@ -84,9 +86,6 @@ export default function Settings() {
       </div>
     );
   }
-
-  const [selectedNode, setSelectedNode] = useState<ServiceNode | null>(null);
-  const [showApiKeys, setShowApiKeys] = useState<{ [key: string]: boolean }>({});
 
   // Workflow nodes configuration
   const nodes: ServiceNode[] = [

@@ -284,6 +284,7 @@ const pulseLabels = {
 export default function Production() {
   const { user, isApproved, loading } = useAuth();
   const router = useRouter();
+  const [selectedChannel, setSelectedChannel] = useState<string | null>(null);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -306,8 +307,6 @@ export default function Production() {
       </div>
     );
   }
-
-  const [selectedChannel, setSelectedChannel] = useState<string | null>(null);
 
   const getProviderStatus = (provider: any) => {
     if (provider.status === "healthy") {

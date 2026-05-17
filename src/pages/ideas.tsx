@@ -7,7 +7,8 @@ import {
   Lightbulb, TrendingUp, DollarSign, Zap, Clock, Filter, 
   Search, Plus, CheckCircle2, XCircle, AlertTriangle, 
   Play, Pause, SkipForward, RotateCcw, Ban, ExternalLink,
-  Loader2, LogOut
+  Loader2, LogOut, Youtube, Brain, Settings as SettingsIcon,
+  Sparkles, Send, PlayCircle, AlertCircle
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -19,6 +20,7 @@ import { signOut } from "@/services/authService";
 export default function Ideas() {
   const { user, isApproved, loading: authLoading } = useAuth();
   const router = useRouter();
+  const [activeTab, setActiveTab] = useState<"submit" | "bank" | "override">("submit");
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -41,8 +43,6 @@ export default function Ideas() {
       </div>
     );
   }
-
-  const [activeTab, setActiveTab] = useState<"submit" | "bank" | "override">("submit");
 
   return (
     <>
