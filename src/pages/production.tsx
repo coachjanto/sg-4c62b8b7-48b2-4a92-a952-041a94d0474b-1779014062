@@ -20,7 +20,7 @@ import {
   Eye,
   Video,
   FileText,
-  Image,
+  Image as ImageIcon,
   Upload,
   BarChart3,
   Sparkles,
@@ -37,6 +37,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { signOut } from "@/services/authService";
+import Image from "next/image";
 
 // Mock data
 const channels = [
@@ -344,10 +345,17 @@ export default function Production() {
             <div className="flex items-start justify-between mb-6">
               <div>
                 <div className="flex items-center gap-3 mb-2">
-                  <Activity className="w-8 h-8 text-accent" />
-                  <h1 className="text-3xl font-bold text-foreground tracking-tight">
-                    Live Production Command Center
-                  </h1>
+                  <Image 
+                    src="/ChatGPT_Image_May_17_2026_08_29_45_PM.png"
+                    alt="Control Room"
+                    width={40}
+                    height={40}
+                    className="object-contain"
+                  />
+                  <div>
+                    <h1 className="text-lg font-semibold text-foreground">Control Room</h1>
+                    <p className="text-xs text-muted-foreground font-mono">PDCA Mission Control</p>
+                  </div>
                 </div>
                 <p className="text-secondary text-lg">
                   Real-time pulse of all active channel workflows, commands, AI usage, and production resources

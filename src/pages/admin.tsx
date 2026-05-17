@@ -2,12 +2,13 @@ import { SEO } from "@/components/SEO";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Shield, Users, CheckCircle2, XCircle, Clock, Loader2, LogOut } from "lucide-react";
+import { Shield, Users, CheckCircle2, XCircle, Clock, Loader2, LogOut, ArrowLeft } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { getAllUsers, approveUser, rejectUser, signOut } from "@/services/authService";
 import Link from "next/link";
+import Image from "next/image";
 
 interface User {
   id: string;
@@ -96,28 +97,24 @@ export default function Admin() {
       
       <div className="min-h-screen bg-slate-950">
         {/* Header */}
-        <header className="border-b border-slate-800 bg-slate-900/50 backdrop-blur-sm sticky top-0 z-10">
-          <div className="max-w-7xl mx-auto px-6 py-4">
-            <div className="flex items-center justify-between">
+        <header className="bg-card border-b border-border">
+          <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div className="flex items-center gap-8">
               <div className="flex items-center gap-3">
-                <div className="flex items-center gap-3">
-                  <Shield className="w-6 h-6 text-cyan-400" />
-                  <div>
-                    <h1 className="text-lg font-bold text-slate-100">Super Admin Panel</h1>
-                    <p className="text-xs text-slate-400">User Access Management</p>
-                  </div>
+                <Image 
+                  src="/ChatGPT_Image_May_17_2026_08_29_45_PM.png"
+                  alt="Control Room"
+                  width={40}
+                  height={40}
+                  className="object-contain"
+                />
+                <div>
+                  <h1 className="text-lg font-semibold text-foreground flex items-center gap-2">
+                    <Shield className="w-5 h-5 text-cyan-400" />
+                    Super Admin Panel
+                  </h1>
+                  <p className="text-xs text-muted-foreground font-mono">User Management & Approvals</p>
                 </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <Link href="/">
-                  <Button variant="outline" className="border-slate-700">
-                    Back to Dashboard
-                  </Button>
-                </Link>
-                <Button onClick={handleSignOut} variant="ghost" className="text-slate-400">
-                  <LogOut className="w-4 h-4 mr-2" />
-                  Sign Out
-                </Button>
               </div>
             </div>
           </div>

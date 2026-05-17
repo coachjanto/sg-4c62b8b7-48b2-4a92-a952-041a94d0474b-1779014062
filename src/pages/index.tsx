@@ -1,13 +1,15 @@
 import { SEO } from "@/components/SEO";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { TrendingUp, TrendingDown, Clock, DollarSign, Video, Eye, Youtube, CheckCircle2, AlertTriangle, XCircle, LogOut, Loader2 } from "lucide-react";
+import { Youtube, TrendingUp, Clock, DollarSign, CheckCircle2, AlertTriangle, XCircle, LogOut } from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { signOut } from "@/services/authService";
+import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 type ChannelMetrics = {
   name: string;
@@ -102,16 +104,21 @@ export default function Home() {
       
       <div className="min-h-screen bg-background">
         {/* Header */}
-        <header className="border-b border-border bg-card">
-          <div className="mx-auto max-w-[1600px] px-6 py-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <h1 className="text-2xl font-bold tracking-wide text-foreground">
-                  CONTROL ROOM
-                </h1>
-                <p className="text-sm text-secondary">
-                  YouTube Channel Management System
-                </p>
+        <header className="bg-card border-b border-border">
+          <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div className="flex items-center gap-8">
+              <div className="flex items-center gap-3">
+                <Image 
+                  src="/ChatGPT_Image_May_17_2026_08_29_45_PM.png"
+                  alt="Control Room"
+                  width={40}
+                  height={40}
+                  className="object-contain"
+                />
+                <div>
+                  <h1 className="text-lg font-semibold text-foreground">Control Room</h1>
+                  <p className="text-xs text-muted-foreground font-mono">PDCA Mission Control</p>
+                </div>
               </div>
               
               <nav className="flex gap-6">

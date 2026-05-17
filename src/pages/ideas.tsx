@@ -16,6 +16,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { signOut } from "@/services/authService";
+import Image from "next/image";
 
 export default function Ideas() {
   const { user, isApproved, loading: authLoading } = useAuth();
@@ -53,13 +54,20 @@ export default function Ideas() {
 
       <div className="min-h-screen bg-slate-950">
         {/* Header */}
-        <header className="border-b border-slate-800 bg-slate-900/50 backdrop-blur-sm sticky top-0 z-50">
-          <div className="container mx-auto px-6 py-4">
-            <div className="flex items-center justify-between">
+        <header className="bg-card border-b border-border">
+          <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div className="flex items-center gap-8">
               <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2">
-                  <Youtube className="w-6 h-6 text-cyan-400" />
-                  <span className="text-xl font-bold text-slate-100">YouTube Control Room</span>
+                <Image 
+                  src="/ChatGPT_Image_May_17_2026_08_29_45_PM.png"
+                  alt="Control Room"
+                  width={40}
+                  height={40}
+                  className="object-contain"
+                />
+                <div>
+                  <h1 className="text-lg font-semibold text-foreground">Control Room</h1>
+                  <p className="text-xs text-muted-foreground font-mono">PDCA Mission Control</p>
                 </div>
               </div>
 

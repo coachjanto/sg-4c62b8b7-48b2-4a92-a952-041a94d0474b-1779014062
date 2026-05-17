@@ -38,6 +38,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { signOut } from "@/services/authService";
+import Image from "next/image";
 
 interface ServiceNode {
   id: string;
@@ -269,29 +270,22 @@ export default function Settings() {
       />
       <div className="min-h-screen bg-background">
         {/* Header */}
-        <header className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
-          <div className="container mx-auto px-6 py-4">
-            <div className="flex items-center justify-between">
-              <nav className="flex gap-6">
-                <Link href="/" className="text-sm font-medium text-secondary hover:text-foreground transition-colors">
-                  Overview
-                </Link>
-                <Link href="/ideas" className="text-sm font-medium text-secondary hover:text-foreground transition-colors">
-                  Ideas
-                </Link>
-                <Link href="/production" className="text-sm font-medium text-secondary hover:text-foreground transition-colors">
-                  Production
-                </Link>
-                <button className="text-sm font-medium text-secondary hover:text-foreground transition-colors">
-                  Advisor
-                </button>
-                <button className="text-sm font-medium text-secondary hover:text-foreground transition-colors">
-                  Monetization
-                </button>
-                <button className="text-sm font-medium text-accent border-b-2 border-accent pb-1">
-                  Settings
-                </button>
-              </nav>
+        <header className="bg-card border-b border-border">
+          <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div className="flex items-center gap-8">
+              <div className="flex items-center gap-3">
+                <Image 
+                  src="/ChatGPT_Image_May_17_2026_08_29_45_PM.png"
+                  alt="Control Room"
+                  width={40}
+                  height={40}
+                  className="object-contain"
+                />
+                <div>
+                  <h1 className="text-lg font-semibold text-foreground">Control Room</h1>
+                  <p className="text-xs text-muted-foreground font-mono">PDCA Mission Control</p>
+                </div>
+              </div>
             </div>
             <div className="flex items-center gap-3">
               {isSuperAdmin && (
