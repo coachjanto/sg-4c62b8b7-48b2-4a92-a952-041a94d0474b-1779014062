@@ -1,7 +1,7 @@
 import { SEO } from "@/components/SEO";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Youtube, TrendingUp, Clock, DollarSign, CheckCircle2, AlertTriangle, XCircle, LogOut } from "lucide-react";
+import { Youtube, TrendingUp, Clock, DollarSign, CheckCircle2, AlertTriangle, XCircle, LogOut, Eye, TrendingDown, Video } from "lucide-react";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 import { useRouter } from "next/router";

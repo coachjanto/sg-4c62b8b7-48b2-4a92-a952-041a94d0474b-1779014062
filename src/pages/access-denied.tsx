@@ -1,7 +1,7 @@
 import { SEO } from "@/components/SEO";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { XCircle, LogOut, AlertTriangle } from "lucide-react";
+import { XCircle, LogOut, AlertTriangle, ShieldX, Mail } from "lucide-react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "@/contexts/AuthContext";
@@ -62,13 +62,13 @@ export default function AccessDenied() {
               </p>
             </div>
 
-            {(profile?.email || user?.email) && (
+            {user?.email && (
               <div className="bg-slate-950/50 border border-slate-800 rounded-xl p-5 mb-6">
                 <div className="flex items-center gap-3">
                   <Mail className="w-5 h-5 text-cyan-400" />
                   <div>
                     <div className="text-sm font-medium text-slate-300">Account</div>
-                    <div className="text-sm text-slate-400">{profile?.email || user?.email}</div>
+                    <div className="text-sm text-slate-400">{user.email}</div>
                   </div>
                 </div>
               </div>

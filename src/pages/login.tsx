@@ -11,6 +11,7 @@ import Image from "next/image";
 export default function Login() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const { user, loading: authLoading } = useAuth();
 
   useEffect(() => {
