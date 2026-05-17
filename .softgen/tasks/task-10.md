@@ -1,6 +1,6 @@
 ---
 title: Ideas Submission & Override Form
-status: in_progress
+status: done
 priority: high
 type: feature
 tags: [ideas, form, manual-input, content]
@@ -13,14 +13,14 @@ position: 10
 Create Ideas page dengan submission form untuk manual content idea requests dan production override commands. User bisa submit idea tanpa AI generation, request specific changes ke workflow, atau force-approve content yang pending. Form terintegrasi dengan idea bank dan production queue.
 
 ## Checklist
-- [ ] Create src/pages/ideas.tsx: Ideas Navigation & Submission page
-- [ ] Manual idea submission form: channel, title, description, format type, target metrics, priority
-- [ ] Override request form: select active production, override type (skip approval, change provider, force retry), reason
-- [ ] Idea bank display: list of submitted ideas dengan status (pending review, approved, in production, rejected)
-- [ ] Scoring preview: show estimated virality/monetization/production difficulty scores
-- [ ] Bulk actions: approve multiple ideas, assign to channels, set priority queue
-- [ ] Add Ideas link ke navigation header
-- [ ] Visual indicators untuk AI-generated vs manually-submitted ideas
+- [x] Create src/pages/ideas.tsx: Ideas Navigation & Submission page
+- [x] Manual idea submission form: channel, title, description, format type, target metrics, priority
+- [x] Override request form: select active production, override type (skip approval, change provider, force retry), reason
+- [x] Idea bank display: list of submitted ideas dengan status (pending review, approved, in production, rejected)
+- [x] Scoring preview: show estimated virality/monetization/production difficulty scores
+- [x] Bulk actions: approve multiple ideas, assign to channels, set priority queue
+- [x] Add Ideas link ke navigation header
+- [x] Visual indicators untuk AI-generated vs manually-submitted ideas
 
 ## Acceptance
 - Ideas page accessible dari navigation header
