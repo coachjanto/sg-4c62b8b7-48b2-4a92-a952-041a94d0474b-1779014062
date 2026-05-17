@@ -12,6 +12,11 @@ position: 11
 ## Notes
 Implement Google OAuth authentication dengan Super Admin approval gate. coach.janto@gmail.com dan jantodj@gmail.com auto-approved sebagai Super Admin. Users lain harus menunggu approval dari Super Admin sebelum bisa akses app.
 
+**Migration Update (2026-05-17):**
+- Migrated to new Supabase project: YTNAV (ideaplus.agency@gmail.com)
+- Project URL: https://ahyhksbmqgfwjhngsjhx.supabase.co
+- Database re-setup complete dengan profiles table + RLS + triggers
+
 ## Checklist
 - [x] Database: profiles table dengan role (user/super_admin) dan approval_status (pending/approved/rejected)
 - [x] RLS policies: public read untuk admin, users hanya bisa read own profile
@@ -26,6 +31,7 @@ Implement Google OAuth authentication dengan Super Admin approval gate. coach.ja
 - [x] Protected routes: index, production, ideas, settings redirect ke login/pending based on status
 - [x] Sign out buttons di semua protected pages
 - [x] Admin panel link untuk super admins
+- [x] Migrated to new Supabase project (YTNAV)
 
 ## Acceptance
 - Google OAuth login works (requires Supabase OAuth setup)
