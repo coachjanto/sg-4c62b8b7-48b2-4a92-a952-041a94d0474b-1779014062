@@ -1,6 +1,6 @@
 ---
 title: Channel Overview Dashboard
-status: in_progress
+status: done
 priority: urgent
 type: feature
 tags: [dashboard, metrics, overview]
@@ -13,11 +13,11 @@ position: 1
 Landing page showing 3 YouTube channels side-by-side with key metrics (growth, views, watch time, upload queue, monetization progress). Mission control aesthetic — compact, data-dense, clear status indicators.
 
 ## Checklist
-- [ ] Design system setup (globals.css color variables, tailwind.config.ts fonts)
-- [ ] Create index.tsx: 3-column channel cards with metrics grid (subscribers, views, watch time, RPM, upload queue count)
-- [ ] Add status indicators (cyan for active, emerald for good performance, amber for warnings, rose for issues)
-- [ ] Add navigation header with logo/title + module tabs (Overview, Ideas, Production, Advisor, Monetization)
-- [ ] Mock data for 3 channels (different niches, varying performance levels)
+- [x] Design system setup (globals.css color variables, tailwind.config.ts fonts)
+- [x] Create index.tsx: 3-column channel cards with metrics grid (subscribers, views, watch time, RPM, upload queue count)
+- [x] Add status indicators (cyan for active, emerald for good performance, amber for warnings, rose for issues)
+- [x] Add navigation header with logo/title + module tabs (Overview, Ideas, Production, Advisor, Monetization)
+- [x] Mock data for 3 channels (different niches, varying performance levels)
 
 ## Acceptance
 - Dashboard loads with 3 channel cards showing distinct metrics
