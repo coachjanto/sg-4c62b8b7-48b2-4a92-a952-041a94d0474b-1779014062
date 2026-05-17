@@ -88,9 +88,9 @@ export default function Home() {
                 <button className="text-sm font-medium text-accent border-b-2 border-accent pb-1">
                   Overview
                 </button>
-                <button className="text-sm font-medium text-secondary hover:text-foreground transition-colors">
+                <Link href="/ideas" className="text-sm font-medium text-secondary hover:text-foreground transition-colors">
                   Ideas
-                </button>
+                </Link>
                 <Link href="/production" className="text-sm font-medium text-secondary hover:text-foreground transition-colors">
                   Production
                 </Link>
