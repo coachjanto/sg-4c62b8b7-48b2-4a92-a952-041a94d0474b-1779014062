@@ -1,30 +1,31 @@
 ---
-title: Settings Page - API Integrations
-status: done
+title: Integration Control Center - Workflow Visualization
+status: in_progress
 priority: urgent
 type: feature
-tags: [settings, api, integrations, oauth]
+tags: [settings, api, integrations, workflow, visualization]
 created_by: agent
 created_at: 2026-05-17T11:23:09Z
 position: 6
 ---
 
 ## Notes
-Settings page untuk menghubungkan YouTube account dan mengintegrasikan API eksternal (OpenAI, Claude, Kling, Veo, Google Sheets, Google Calendar, n8n). Setiap service memiliki connection card dengan status indicator dan form konfigurasi.
+Redesign Settings into visual workflow map yang menjelaskan arsitektur sistem secara visual (seperti n8n). User harus bisa memahami aliran data, dependency antar service, dan peran setiap integration hanya dengan melihat halaman ini. Bukan form settings biasa — ini peta operasional AI media operating system.
 
 ## Checklist
-- [x] Create src/pages/settings.tsx: settings page dengan navigation dari header
-- [x] YouTube OAuth section: Connect button, display connected account info, disconnect option
-- [x] AI Services section: OpenAI API key, Claude API key, Kling API key, Veo API key
-- [x] Google Services section: Google Sheets OAuth, Google Calendar OAuth
-- [x] Automation section: n8n webhook URL configuration
-- [x] Connection status indicators (connected/disconnected) untuk setiap service
-- [x] Save API keys ke .env.local via instructions, tampilkan masked values
-- [x] Test/Validate button untuk setiap API connection
-- [x] Add Settings link ke navigation header
+- [ ] Workflow canvas dengan horizontal flow visualization
+- [ ] Node untuk setiap layer: Idea Navigation, AI Strategy (OpenAI/Claude), Production (Kling/Veo), Automation (n8n), Data (Supabase/Google Sheets), Publishing (YouTube), Analytics Engine
+- [ ] Animated connection lines menunjukkan data flow direction
+- [ ] Status indicators di setiap node (connected/disconnected/warning/syncing)
+- [ ] Click node membuka configuration panel (API keys, test connection, usage logs)
+- [ ] Connection health dashboard section
+- [ ] Sync logs dan error center
+- [ ] API usage monitoring dan monthly cost estimation
+- [ ] Educational tooltips menjelaskan peran setiap integration
 
 ## Acceptance
-- Settings page accessible dari navigation header
-- Setiap service memiliki connection card dengan status dan configuration form
-- API keys tersimpan aman di environment variables (masked di UI)
-- Connection status indicators berfungsi dengan benar
+- Workflow map menampilkan semua integration nodes dengan visual data flow
+- User bisa memahami arsitektur sistem hanya dari Settings page
+- Setiap node menampilkan status, last sync, dan clickable untuk configuration
+- Animated connection lines menunjukkan arah aliran data
+- Design feels like "AI operating system" — intelligent, analytical, futuristic
