@@ -2,6 +2,7 @@ import { SEO } from "@/components/SEO";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp, TrendingDown, Clock, DollarSign, Video, Eye } from "lucide-react";
+import Link from "next/link";
 
 type ChannelMetrics = {
   name: string;
@@ -99,6 +100,9 @@ export default function Home() {
                 <button className="text-sm font-medium text-secondary hover:text-foreground transition-colors">
                   Monetization
                 </button>
+                <Link href="/settings" className="text-sm font-medium text-secondary hover:text-foreground transition-colors">
+                  Settings
+                </Link>
               </nav>
             </div>
           </div>
