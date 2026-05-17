@@ -16,6 +16,7 @@ Implement Google OAuth authentication dengan Super Admin approval gate. coach.ja
 - Migrated to new Supabase project: YTNAV (ideaplus.agency@gmail.com)
 - Project URL: https://ahyhksbmqgfwjhngsjhx.supabase.co
 - Database re-setup complete dengan profiles table + RLS + triggers
+- Brand logo implemented across all pages (login, app pages, auth flows)
 
 ## Checklist
 - [x] Database: profiles table dengan role (user/super_admin) dan approval_status (pending/approved/rejected)
@@ -23,19 +24,21 @@ Implement Google OAuth authentication dengan Super Admin approval gate. coach.ja
 - [x] Trigger: auto-create profile on signup, auto-approve super admin emails
 - [x] Auth service: signInWithGoogle, getUserProfile, checkUserApproval, approve/reject functions
 - [x] Auth context: session state, approval status, isSuperAdmin flag
-- [x] Login page dengan Google OAuth button
+- [x] Login page dengan Google OAuth button + brand logo
 - [x] Auth callback handler untuk redirect setelah OAuth
-- [x] Pending Approval page untuk non-approved users
-- [x] Access Denied page untuk rejected users
-- [x] Super Admin dashboard untuk approve/reject pending users
+- [x] Pending Approval page untuk non-approved users + logo
+- [x] Access Denied page untuk rejected users + logo
+- [x] Super Admin dashboard untuk approve/reject pending users + logo
 - [x] Protected routes: index, production, ideas, settings redirect ke login/pending based on status
 - [x] Sign out buttons di semua protected pages
 - [x] Admin panel link untuk super admins
 - [x] Migrated to new Supabase project (YTNAV)
+- [x] Brand logo implemented di semua pages (auto-optimized dengan Next.js Image)
 
 ## Acceptance
-- Google OAuth login works (requires Supabase OAuth setup)
+- Google OAuth login works (requires Supabase OAuth setup - manual step)
 - Super admins auto-approved, others go to pending-approval
 - Super Admin dashboard shows pending users, can approve/reject
 - Approved users dapat akses app, rejected users lihat access-denied
 - All protected routes check auth + approval_status
+- Brand logo visible di semua halaman
