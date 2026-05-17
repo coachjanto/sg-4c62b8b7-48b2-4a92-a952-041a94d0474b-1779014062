@@ -139,7 +139,7 @@ export default function Ideas() {
                     <label className="text-sm text-slate-400 block mb-2">Content Format</label>
                     <select className="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-100">
                       <option value="">Select format...</option>
-                      <option value="shorts">YouTube Shorts (< 60s)</option>
+                      <option value="shorts">YouTube Shorts (&lt; 60s)</option>
                       <option value="longform">Longform Video (8-15 min)</option>
                       <option value="compilation">Compilation (5-10 min)</option>
                     </select>
