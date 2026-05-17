@@ -33,6 +33,145 @@ const getURL = () => {
   return url
 }
 
+// Helper to get base URL for redirects (works in preview and production)
+const getRedirectURL = () => {
+  if (typeof window === "undefined") return "";
+  return `${window.location.origin}/auth/callback`;
+};
+
+/**
+ * Sign in with Google OAuth
+ */
+export const signInWithGoogle = async () => {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: getRedirectURL(),
+      queryParams: {
+        access_type: "offline",
+        prompt: "consent",
+      },
+    },
+  });
+
+  if (error) throw error;
+  return data;
+};
+
+/**
+ * Get current user profile with approval status
+ */
+export const getUserProfile = async () => {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return null;
+
+  const { data: profile, error } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", user.id)
+    .single();
+
+  if (error) {
+    console.error("Error fetching profile:", error);
+    return null;
+  }
+
+  return profile;
+};
+
+/**
+ * Check if user is approved
+ */
+export const checkUserApproval = async () => {
+  const profile = await getUserProfile();
+  if (!profile) return { approved: false, status: "no_profile" };
+
+  return {
+    approved: profile.approval_status === "approved",
+    status: profile.approval_status,
+    role: profile.role,
+  };
+};
+
+/**
+ * Get current user session
+ */
+export const getSession = async () => {
+  const { data: { session }, error } = await supabase.auth.getSession();
+  if (error) {
+    console.error("Error getting session:", error);
+    return null;
+  }
+  return session;
+};
+
+/**
+ * Sign out
+ */
+export const signOut = async () => {
+  const { error } = await supabase.auth.signOut();
+  if (error) throw error;
+};
+
+/**
+ * Get all pending users (Super Admin only)
+ */
+export const getPendingUsers = async () => {
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("approval_status", "pending")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Error fetching pending users:", error);
+    return [];
+  }
+
+  return data;
+};
+
+/**
+ * Get all users (Super Admin only)
+ */
+export const getAllUsers = async () => {
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    console.error("Error fetching all users:", error);
+    return [];
+  }
+
+  return data;
+};
+
+/**
+ * Approve user (Super Admin only)
+ */
+export const approveUser = async (userId: string) => {
+  const { error } = await supabase
+    .from("profiles")
+    .update({ approval_status: "approved", updated_at: new Date().toISOString() })
+    .eq("id", userId);
+
+  if (error) throw error;
+};
+
+/**
+ * Reject user (Super Admin only)
+ */
+export const rejectUser = async (userId: string) => {
+  const { error } = await supabase
+    .from("profiles")
+    .update({ approval_status: "rejected", updated_at: new Date().toISOString() })
+    .eq("id", userId);
+
+  if (error) throw error;
+};
+
 export const authService = {
   // Get current user
   async getCurrentUser(): Promise<AuthUser | null> {
